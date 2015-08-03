@@ -16,7 +16,7 @@ public class MoveBall : MonoBehaviour {
 
 	Rigidbody myRigidbody;
 
-	float horizontalWeight = 2f;
+	float horizontalWeight = 10f;
 	float verticalWeight = 1f;
 
 	void Start() {
@@ -46,7 +46,7 @@ public class MoveBall : MonoBehaviour {
 			myRigidbody.AddForce(-myRigidbody.velocity);
 		}
 		else if(mySpeed > jumpMaxSpeed && isFalling) {
-			//moveVertical = 0f;
+			moveVertical = 0f;
 			myRigidbody.AddForce(-myRigidbody.velocity);
 		}
 
