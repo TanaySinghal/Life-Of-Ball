@@ -20,7 +20,12 @@ public class MoveBall : MonoBehaviour {
 	float horizontalWeight = 10f;
 	float verticalWeight = 1f;
 
+	Vector3 startingBallPos;
+
 	void Start() {
+		//set starting ball pos.
+		startingBallPos = transform.position;
+
 		mySpeed = 0f;
 		myRigidbody = GetComponent<Rigidbody>();
 		//cameraGO = transform.FindChild("FollowCamera");

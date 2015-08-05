@@ -13,7 +13,8 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		followCamera(0.2f, 3f);
+		//Damp, distance
+		followCamera(0.2f, 4f);
 		//followBall();
 	}
 

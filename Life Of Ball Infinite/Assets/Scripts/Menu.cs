@@ -20,8 +20,11 @@ public class Menu : MonoBehaviour {
 		//Http request friend's scores
 	}
 
-	public void QuitGame() {
-		Application.Quit();
+	public void Settings() {
+	}
+
+	public void ReturnToMainMenu() {
+		Application.LoadLevel("Start");
 	}
 	
 }
