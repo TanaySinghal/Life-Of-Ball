@@ -1,55 +1,21 @@
 Base path: /Applications/Unity/Unity.app/Contents
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-2089255680
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-2015339264
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=0 type=0 insize=9591 outsize=6498 kw=UNITY_COLORSPACE_GAMMA ok=1
+  api=0 type=0 insize=1051 outsize=582 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=9591 outsize=6 kw=UNITY_COLORSPACE_GAMMA ok=1
+  api=0 type=1 insize=1051 outsize=6 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=751 outsize=1893 kw=SHADOWS_DEPTH ok=1
+  api=0 type=0 insize=1089 outsize=669 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=751 outsize=6 kw=SHADOWS_DEPTH ok=1
+  api=0 type=1 insize=1089 outsize=6 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=982 outsize=9902 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+  api=0 type=0 insize=982 outsize=10483 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=982 outsize=6 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+  api=0 type=1 insize=982 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=5705 kw=DIRECTIONAL SHADOWS_OFF ok=1
+  api=0 type=0 insize=982 outsize=10016 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=938 outsize=6 kw=DIRECTIONAL SHADOWS_OFF ok=1
+  api=0 type=1 insize=982 outsize=6 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=982 outsize=10369 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=982 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=541 outsize=1893 kw=SHADOWS_DEPTH ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=541 outsize=6 kw=SHADOWS_DEPTH ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=6810 outsize=2300 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=6810 outsize=6 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=3647 outsize=1489 kw=DIRECTIONAL ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=3647 outsize=6 kw=DIRECTIONAL ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=6731 outsize=2252 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=6731 outsize=6 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=3569 outsize=1441 kw=DIRECTIONAL ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=3569 outsize=6 kw=DIRECTIONAL ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=982 outsize=11132 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=6059 kw=POINT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=5976 kw=DIRECTIONAL_COOKIE SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=6173 kw=DIRECTIONAL SHADOWS_SCREEN ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=6827 kw=POINT SHADOWS_CUBE ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=938 outsize=7093 kw=SPOT SHADOWS_DEPTH SHADOWS_SOFT SHADOWS_NATIVE ok=1
+  api=0 type=1 insize=938 outsize=6 kw=POINT SHADOWS_OFF ok=1

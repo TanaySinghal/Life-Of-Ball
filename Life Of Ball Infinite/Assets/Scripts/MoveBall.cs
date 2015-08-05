@@ -8,22 +8,30 @@ public class MoveBall : MonoBehaviour {
 	private bool jump, isFalling;
 
 	private float mySpeed;
+	private float myMass;
 
 	public float moveForce;
 	public float moveMaxSpeed;
 	public float jumpMaxSpeed;
 	public float jumpForce;
-
+	
+	
+	float deathPause = 1f;
 	Rigidbody myRigidbody;
 
 	float horizontalWeight = 10f;
 	float verticalWeight = 1f;
 
+	public static int score;
+	int highscore;
+
 	void Start() {
+		highscore = PlayerPrefs.GetInt("highscore");   
+		score = 0;
 		mySpeed = 0f;
 		myRigidbody = GetComponent<Rigidbody>();
 		//cameraGO = transform.FindChild("FollowCamera");
-		cameraGO = GameObject.Find("FollowCamera").transform;
+		cameraGO = GameObject.FindGameObjectWithTag("MainCamera").transform;
 	}
 
 	// Update is called once per frame
@@ -67,7 +75,31 @@ public class MoveBall : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		//GUI.Button(new Rect(Screen.width/2-150, 60, 300, 30), "Speed: " + mySpeed);
+		GUI.Button(new Rect(Screen.width/2-150, 60, 300, 30), "High score: " + highscore);
+		GUI.Button(new Rect(Screen.width/2-150, 20, 300, 30), "Score: " + score);
+	}
+	
+	public void Underwater() {
+		myRigidbody.drag = 2f;
+		myRigidbody.angularDrag = 1f;
+	}
+	
+	public void AboveWater() {
+		myRigidbody.drag = 0.1f;
+		myRigidbody.angularDrag = 0.05f;
+	}
+	
+	public IEnumerator KillPlayer() {
+		yield return new WaitForSeconds(deathPause);
+		score = 0;
+		Application.LoadLevel("Finish");
+	}
+
+	public void StoreHighscore() { 
+		if(score > highscore) {
+			PlayerPrefs.SetInt("highscore", score);
+			highscore = PlayerPrefs.GetInt("highscore");
+		}
 	}
 
 	void OnCollisionEnter(Collision c) {

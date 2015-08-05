@@ -17,3 +17,6 @@ Cmd: compileSnippet
   api=0 type=0 insize=938 outsize=7763 kw=POINT SHADOWS_CUBE SHADOWS_SOFT ok=1
 Cmd: compileSnippet
   api=0 type=0 insize=938 outsize=7897 kw=POINT_COOKIE SHADOWS_CUBE SHADOWS_SOFT ok=1
+End of pipe
+
+Quitting shader compiler process
