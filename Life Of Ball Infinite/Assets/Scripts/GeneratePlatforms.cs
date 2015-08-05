@@ -13,14 +13,13 @@ public class GeneratePlatforms : MonoBehaviour {
 	int deletePlatformFromLargest = 4;
 
 	float jumpDistance;
-	
 	float minJumpDistance = 3f;
-	float maxJumpDistance = 8f;
 
-	MoveBall moveBall;
 
-	void Start () {
-		moveBall = this.GetComponent<MoveBall>();
+	Score score;
+
+	void Awake () {
+		score = GameObject.Find("ScoreText").GetComponent<Score>();
 		largestPlatformID = 0;
 		//keep increasing jumpDistance as the level goes on..
 		jumpDistance = minJumpDistance;
@@ -30,8 +29,6 @@ public class GeneratePlatforms : MonoBehaviour {
 		//load platform
 		platform = Resources.Load("Platform") as GameObject;
 		badPlatform = Resources.Load("BadPlatform") as GameObject;
-
-		Transform startingPlatform = GameObject.Find("Platform-0").transform;
 	}
 
 	void OnCollisionEnter(Collision c) {
@@ -44,8 +41,10 @@ public class GeneratePlatforms : MonoBehaviour {
 			int platformID = int.Parse(tempSplit[1]);
 
 			if(platformID == largestPlatformID) {
-				MoveBall.score  = largestPlatformID;
-				moveBall.StoreHighscore();
+				//TODO: Get rid of moveball scores
+				//MoveBall.score  = largestPlatformID;
+				Score.score.text = largestPlatformID.ToString();
+				score.StoreHighscore();
 				CreatePlatform(c.collider.transform);
 				DeletePlatform(largestPlatformID-deletePlatformFromLargest);
 			}
@@ -54,27 +53,22 @@ public class GeneratePlatforms : MonoBehaviour {
 			Destroy(c.gameObject);
 		}
 	}
-
-	int amountOfAnglesOnEachSide = 2;
-	float maxDegree = 30f;
-
-
-	//As the score gets higher and higher....
-	//Increase maxAngle incrementally...
-	//Increase difficulty more and more...
-	//Increase badplatformprob
-
+	
 	void CreatePlatform(Transform thisPlatform) {
 		//Update largest platform id
 		largestPlatformID ++;
 
 		float minAngle = 30f;
-		float maxAngle = 50f;
-		float difficulty = 10f;
-		float badPlatformProb = 0;
-		badPlatformProb = Mathf.Clamp(badPlatformProb, 0, 8);
 		int badPlatformCount = 0;
-		
+
+		//TODO: As score gets higher, these four increase
+		float maxAngle = 50f;
+		//float difficulty = 10f;
+		int badPlatformProb = 8; //0 to 8
+		//float maxJumpDistance = 8f;
+
+		badPlatformProb = Mathf.Clamp(badPlatformProb, 0, 8);
+		badPlatformProb = 11-badPlatformProb;
 
 		for(int i = -1; i <= 1; i += 1) {
 			float degreeAngle = i*Random.Range(minAngle,maxAngle);
@@ -95,8 +89,6 @@ public class GeneratePlatforms : MonoBehaviour {
 
 			Vector3 nextPlatformPosition = thisPlatform.position + forwardOffset + sideWaysOffset;
 
-			float xRot = 0;
-			float zRot = 0;
 			//zRot = Random.Range(0f,1f) * difficulty;
 			//xRot = Random.Range(-1f,1f) * difficulty;
 
@@ -105,7 +97,9 @@ public class GeneratePlatforms : MonoBehaviour {
 
 			GameObject nextPlatform;
 			//50% chance that we color
-			if(Random.Range(1,11-badPlatformProb) == 1 && badPlatformCount < 2) {
+
+			badPlatformProb = 3;
+			if(Random.Range(1,badPlatformProb) == 1 && badPlatformCount < 2) {
 				nextPlatform = Instantiate(badPlatform, nextPlatformPosition, nextPlatformRotation) as GameObject;
 				nextPlatform.tag = "BadPlatform";
 				nextPlatform.GetComponent<Renderer>().material.color = Color.red;

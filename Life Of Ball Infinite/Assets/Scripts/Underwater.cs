@@ -19,7 +19,6 @@ public class Underwater : MonoBehaviour {
 		if(cam.position.y < transform.position.y ) {
 			RenderSettings.fog = true;
 			moveBall.Underwater();
-			StartCoroutine(moveBall.KillPlayer());
 		}
 		else {
 			RenderSettings.fog = false;
