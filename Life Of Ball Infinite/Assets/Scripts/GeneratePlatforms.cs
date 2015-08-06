@@ -9,10 +9,10 @@ public class GeneratePlatforms : MonoBehaviour {
 	
 	Transform platformParent;
 
-	int largestPlatformID;
-	int deletePlatformFromLargest = 4;
+	//Being accessed from DestroyPlatform
+	public static int largestPlatformID;
 
-	float jumpDistance;
+	int deletePlatformFromLargest = 4;
 
 
 	Score score;
@@ -42,6 +42,7 @@ public class GeneratePlatforms : MonoBehaviour {
 				//MoveBall.score  = largestPlatformID;
 				Score.score.text = largestPlatformID.ToString();
 				score.StoreHighscore();
+				score.OnScoreChange();
 				CreatePlatform(c.collider.transform);
 				DeletePlatform(largestPlatformID-deletePlatformFromLargest);
 			}
@@ -60,27 +61,31 @@ public class GeneratePlatforms : MonoBehaviour {
 		float minAngle = 30f;
 		int badPlatformCount = 0;
 
-		//TODO: As score gets higher, max angle increases
+		//From score 0 to 15, maxAngle increases from 30 to 70
+		float maxAngle = Mathf.Clamp(largestPlatformID*2, 0f, 30f) + 40f;
 
-		float maxAngle = 50f;
-		//float difficulty = 10f;
-		int badPlatformProb = 0; //change from 0 to 3
+		//From score 0 to 15, increase probablity of making a bad platform from 1/6 to 1/2
+		int rangeBadPlatformProb = 3;
+		int badPlatformProb = 6 - Mathf.Clamp(largestPlatformID/5, 0, rangeBadPlatformProb);
 
-		//THIS IS ALREADY CHANGING BY LEVEL
-		float maxJumpDistance = 7f;
+		//From score 0 to 15, increase maxJumpDistance from 3 to 6
 		float minJumpDistance = 3f;
-
-		//Max jump distance varies based on 
-
-		badPlatformProb = Mathf.Clamp(largestPlatformID/5, 0, 3);
-		maxJumpDistance = minJumpDistance + Mathf.Clamp(largestPlatformID/10f, 0, maxJumpDistance-minJumpDistance);
-
-		badPlatformProb = Mathf.Clamp(badPlatformProb, 0, 8);
-		badPlatformProb = 11-badPlatformProb;
+		float rangeJumpDistance = 3f;
+		float maxJumpDistance = minJumpDistance + Mathf.Clamp(largestPlatformID/5f, 0, rangeJumpDistance);
 
 		for(int i = -1; i <= 1; i += 1) {
-			jumpDistance = Random.Range(minJumpDistance, maxJumpDistance);
+			//Initialize all random values based on difficulty
+
+			//Likelyhood of creating a bad platform (1 means yes)
+			int badPlatformLottery = Random.Range(1,badPlatformProb);
+
+			//Gap between platforms
+			float jumpDistance = Random.Range(minJumpDistance, maxJumpDistance);
+
+			//Angle between current platform and next platform
 			float degreeAngle = i*Random.Range(minAngle,maxAngle);
+
+			//Convert from degrees to radians
 			float radAngle = degreeAngle*Mathf.Deg2Rad;
 
 			//Calculate size of current platform and add jumpDistance
@@ -89,35 +94,40 @@ public class GeneratePlatforms : MonoBehaviour {
 			//Calculate total distance
 			float platformDistance = platformLength + jumpDistance;
 
-			//Offset by hypotenuse.. 
+			//Offset must equal hypotenuse.. 
 			//-thisplatform.right means transform.forward
 			//-thisplatform.up means transform.right
-			//Fix this in the future using children or something..
+			//TODO: Something seriously wrong here because the above values are strange...
 			Vector3 forwardOffset = (platformDistance*-thisPlatform.right)*Mathf.Cos(radAngle);
 			Vector3 sideWaysOffset = (platformDistance*-thisPlatform.up)*Mathf.Sin(radAngle);
 
+			//Add up all the offsets and this platform position to create next platform
 			Vector3 nextPlatformPosition = thisPlatform.position + forwardOffset + sideWaysOffset;
 
-			//zRot = Random.Range(0f,1f) * difficulty;
-			//xRot = Random.Range(-1f,1f) * difficulty;
 
 			//TODO: Something seriously wrong with this eulerAngles.y ... changing X changes Y as well. it's strange
 			Quaternion nextPlatformRotation =  Quaternion.Euler(new Vector3(-90, degreeAngle+thisPlatform.eulerAngles.y, 0));
 
 			GameObject nextPlatform;
-			//50% chance that we color
 
-			//badPlatformProb = 8;
-			if(Random.Range(1,6-badPlatformProb) == 1 && badPlatformCount < 2) {
+			//Check if we have won the loterry to create a bad platform
+			//Make sure not all the next platforms are bad platforms
+			//If these are true, create bad platform
+			if(badPlatformLottery == 1 && badPlatformCount < 2) {
 				nextPlatform = Instantiate(badPlatform, nextPlatformPosition, nextPlatformRotation) as GameObject;
 				nextPlatform.tag = "BadPlatform";
 				nextPlatform.GetComponent<Renderer>().material.color = Color.red;
+				//keep track of how many bad platforms we have
 				badPlatformCount ++;
 			}
 			else {
+				//Otherwise just create a normal platform
 				nextPlatform = Instantiate(platform, nextPlatformPosition, nextPlatformRotation) as GameObject;
 			}
+
 			nextPlatform.name = "Platform-" + largestPlatformID;
+
+			//This is just for organization purposes..
 			nextPlatform.transform.parent = platformParent;
 		}
 	}

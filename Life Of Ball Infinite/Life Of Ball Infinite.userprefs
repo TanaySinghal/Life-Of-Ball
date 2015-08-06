@@ -1,14 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Underwater.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GeneratePlatforms.cs">
     <Files>
       <File FileName="Assets/Scripts/Highscores.cs" Line="19" Column="1" />
       <File FileName="Assets/Scripts/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MoveBall.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GeneratePlatforms.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Underwater.cs" Line="29" Column="14" />
+      <File FileName="Assets/Scripts/MoveBall.cs" Line="87" Column="34" />
+      <File FileName="Assets/Scripts/GeneratePlatforms.cs" Line="70" Column="23" />
+      <File FileName="Assets/Scripts/Underwater.cs" Line="43" Column="38" />
       <File FileName="Assets/Scripts/Menu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Score.cs" Line="44" Column="34" />
+      <File FileName="Assets/Scripts/Score.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DestroyPlatform.cs" Line="13" Column="76" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

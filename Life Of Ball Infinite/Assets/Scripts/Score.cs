@@ -16,50 +16,48 @@ public class Score : MonoBehaviour {
 	public static Text score;
 
 	int highscore;
+
+	Color color;
 	//iphone and ipad screen res
 
-	//1536x2048
-	//1080x1920
-	//750x1334
-	//768x1024
-	//640x960
+	//1536x2048 = 1.426
+	//1080x1920 = 1.778
+	//750x1334 = 1.779
+	//768x1024 = 1.333
+	//640x960 1.5
 
 
 	//MINE: 859 416
 	void Awake () {
+		Debug.Log("Ratio: " + ((float)Screen.width/(float)Screen.height));
+
 		rectTransform = gameObject.GetComponent<RectTransform>();
 		score = gameObject.GetComponent<Text>();
 
 		highscore = PlayerPrefs.GetInt("highscore");
 		score.text = "0";
-		RightText();
+		color = Color.black;
+		InitializeText();
+		OnScoreChange();
 	}
 
-	void RightText() {
-		fontSize = (int)Mathf.Round((50f/416f)*Screen.height);
-		rectHeight = (60f/416f)*Screen.height;
-		rectWidth = fontSize*5f;
-		screenOffset = (10f/416f)*Screen.height;
+	void InitializeText() {
+		float screenHeight = Screen.height;
+
+		fontSize = (int)Mathf.Round((1f/8f)*screenHeight);
+		score.fontSize = fontSize;
 		
+		rectHeight = fontSize*1.2f;
+		screenOffset = (20f/500f)*screenHeight;
+	}
+
+	public void OnScoreChange() {
+		score.color = color;
+		rectWidth = score.preferredWidth;
 		float posXFormula = -(rectWidth/2 + screenOffset);
-		
-		//Setting
-		rectTransform.anchoredPosition = new Vector3(posXFormula,0,0);
-		rectTransform.sizeDelta = new Vector3(rectWidth, rectHeight);
-		score.fontSize = fontSize;
-	}
+		rectTransform.anchoredPosition = new Vector3(posXFormula, 0, 0);
+		rectTransform.sizeDelta = new Vector2(rectWidth, rectHeight);
 
-	void CenterText() {
-		fontSize = (int)Mathf.Round((50f/416f)*Screen.height);
-		rectHeight = (60f/416f)*Screen.height;
-		screenOffset = (10f/416f)*Screen.height;
-		
-		float posYFormula = -(fontSize/2+screenOffset);
-		
-		//Setting
-		rectTransform.anchoredPosition = new Vector3(0,posYFormula,0);
-		rectTransform.sizeDelta = new Vector3(Screen.width, rectHeight);
-		score.fontSize = fontSize;
 	}
 	
 	public void StoreHighscore() { 
@@ -68,6 +66,7 @@ public class Score : MonoBehaviour {
 
 		if(actualScore > highscore) {
 			PlayerPrefs.SetInt("highscore", actualScore);
+			color = new Color(0.75f, 0f, 0f);
 		}
 	}
 }

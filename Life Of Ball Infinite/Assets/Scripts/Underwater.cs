@@ -14,6 +14,7 @@ public class Underwater : MonoBehaviour {
 		moveBall = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveBall> ();
 		cam = GameObject.Find("FollowCamera").transform;
 		oceanBeds = GameObject.Find("OceanBeds").transform;
+		oceanBeds.gameObject.SetActive(false);
 
 		RenderSettings.fogColor = new Color(0.156f, 0.27f, 0.39f);
 		RenderSettings.fogDensity = 0.1f;
@@ -23,14 +24,12 @@ public class Underwater : MonoBehaviour {
 
 	void Update () {
 		if(cam.position.y < transform.position.y && !alreadyUnderwater) {
-			Debug.Log("One time1");
 			alreadyUnderwater = true;
 			RenderSettings.fog = true;
 			followBall();
 			moveBall.Underwater();
 		}
 		else if(cam.position.y >= transform.position.y && alreadyUnderwater) {
-			Debug.Log("One time2");
 			alreadyUnderwater = false;
 			RenderSettings.fog = false;
 			moveBall.AboveWater();
@@ -39,6 +38,7 @@ public class Underwater : MonoBehaviour {
 
 	
 	public void followBall () {
+		oceanBeds.gameObject.SetActive(true);
 		oceanBeds.position = new Vector3(cam.position.x, 0, cam.position.z);
 	}
 }
