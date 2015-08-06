@@ -13,7 +13,6 @@ public class GeneratePlatforms : MonoBehaviour {
 	int deletePlatformFromLargest = 4;
 
 	float jumpDistance;
-	float minJumpDistance = 3f;
 
 
 	Score score;
@@ -21,8 +20,6 @@ public class GeneratePlatforms : MonoBehaviour {
 	void Awake () {
 		score = GameObject.Find("ScoreText").GetComponent<Score>();
 		largestPlatformID = 0;
-		//keep increasing jumpDistance as the level goes on..
-		jumpDistance = minJumpDistance;
 		//jumpDistance = Mathf.Clamp(jumpDistance, minJumpDistance, maxJumpDistance);
 		platformParent = GameObject.Find("Platforms").transform;
 
@@ -53,7 +50,9 @@ public class GeneratePlatforms : MonoBehaviour {
 			Destroy(c.gameObject);
 		}
 	}
-	
+
+	float currentJumpDistance;
+
 	void CreatePlatform(Transform thisPlatform) {
 		//Update largest platform id
 		largestPlatformID ++;
@@ -61,16 +60,26 @@ public class GeneratePlatforms : MonoBehaviour {
 		float minAngle = 30f;
 		int badPlatformCount = 0;
 
-		//TODO: As score gets higher, these four increase
+		//TODO: As score gets higher, max angle increases
+
 		float maxAngle = 50f;
 		//float difficulty = 10f;
-		int badPlatformProb = 8; //0 to 8
-		//float maxJumpDistance = 8f;
+		int badPlatformProb = 0; //change from 0 to 3
+
+		//THIS IS ALREADY CHANGING BY LEVEL
+		float maxJumpDistance = 7f;
+		float minJumpDistance = 3f;
+
+		//Max jump distance varies based on 
+
+		badPlatformProb = Mathf.Clamp(largestPlatformID/5, 0, 3);
+		maxJumpDistance = minJumpDistance + Mathf.Clamp(largestPlatformID/10f, 0, maxJumpDistance-minJumpDistance);
 
 		badPlatformProb = Mathf.Clamp(badPlatformProb, 0, 8);
 		badPlatformProb = 11-badPlatformProb;
 
 		for(int i = -1; i <= 1; i += 1) {
+			jumpDistance = Random.Range(minJumpDistance, maxJumpDistance);
 			float degreeAngle = i*Random.Range(minAngle,maxAngle);
 			float radAngle = degreeAngle*Mathf.Deg2Rad;
 
@@ -98,8 +107,8 @@ public class GeneratePlatforms : MonoBehaviour {
 			GameObject nextPlatform;
 			//50% chance that we color
 
-			badPlatformProb = 3;
-			if(Random.Range(1,badPlatformProb) == 1 && badPlatformCount < 2) {
+			//badPlatformProb = 8;
+			if(Random.Range(1,6-badPlatformProb) == 1 && badPlatformCount < 2) {
 				nextPlatform = Instantiate(badPlatform, nextPlatformPosition, nextPlatformRotation) as GameObject;
 				nextPlatform.tag = "BadPlatform";
 				nextPlatform.GetComponent<Renderer>().material.color = Color.red;

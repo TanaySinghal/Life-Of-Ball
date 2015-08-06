@@ -83,7 +83,7 @@ public class MoveBall : MonoBehaviour {
 	}
 	
 	public void AboveWater() {
-		myRigidbody.drag = 0.1f;
+		myRigidbody.drag = 0f;
 		myRigidbody.angularDrag = 0.05f;
 	}
 	
