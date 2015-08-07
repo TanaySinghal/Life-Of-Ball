@@ -52,7 +52,7 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void StartGame() {
-		Application.LoadLevel("Demo");
+		Application.LoadLevel("Loading");
 	}
 
 	public void Highscore() {

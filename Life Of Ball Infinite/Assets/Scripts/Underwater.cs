@@ -18,7 +18,7 @@ public class Underwater : MonoBehaviour {
 
 		RenderSettings.fogColor = new Color(0.156f, 0.27f, 0.39f);
 		RenderSettings.fogDensity = 0.1f;
-		RenderSettings.fog = false;
+		RenderSettings.fog = true;
 		alreadyUnderwater = true;
 	}
 

@@ -24,6 +24,10 @@ public class MoveBall : MonoBehaviour {
 
 	bool isMobile;
 
+	AudioSource myAudioSource;
+
+	public AudioClip bounceSound, tapSound;
+
 	void Start() {
 		//set starting ball pos.
 		startingBallPos = transform.position;
@@ -34,9 +38,14 @@ public class MoveBall : MonoBehaviour {
 		cameraGO = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
 		isMobile = Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
+
+		myAudioSource = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
+
+	int frameRate;
+
 	void Update () {
 		if (isMobile) {
 			moveHorizontal = Mathf.Clamp(Input.acceleration.x,-1,1);
@@ -47,7 +56,10 @@ public class MoveBall : MonoBehaviour {
 			moveVertical = Input.GetAxis("Vertical");
 		}
 
-		jump = Input.GetMouseButtonDown(0) || Input.GetKeyDown("space");
+		jump = Input.GetMouseButton(0) || Input.GetKey("space");
+
+		//instead take the average over time..
+		frameRate = (int)(1/Time.deltaTime);
 	}
 
 	void FixedUpdate() {
@@ -70,8 +82,9 @@ public class MoveBall : MonoBehaviour {
 		//Forward force
 		myRigidbody.AddForce(direction*moveForce*Time.deltaTime);
 		
-		//Jump force
+		//Allow jump if we are on the ground
 		if (jump && !isFalling) {
+			playTapSound();
 			myRigidbody.AddForce(Vector3.up*jumpForce*Time.deltaTime);
 			isFalling = true;
 			jump = false;
@@ -81,10 +94,9 @@ public class MoveBall : MonoBehaviour {
 		}
 	}
 
-	/*void OnGUI() {
-		GUI.Button(new Rect(Screen.width/2-150, 60, 300, 30), "High score: " + highscore);
-		GUI.Button(new Rect(Screen.width/2-150, 20, 300, 30), "Score: " + score);
-	}*/
+	void OnGUI() {
+		GUI.Button(new Rect(Screen.width/2-150, 60, 300, 30), "Frame Rate: " + frameRate);
+	}
 	
 	public void Underwater() {
 		myRigidbody.drag = 2f;
@@ -102,8 +114,23 @@ public class MoveBall : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c) {
 		isFalling = false;
-		if(c.collider.name == "OceanFloor") {
+		if(c.collider.tag == "Platform") {
+			PlayBounceSound();
+		}
+		else if(c.collider.tag == "OceanFloor") {
 			KillPlayer();
 		}
+	}
+	
+	void playTapSound() {
+		myAudioSource.clip = tapSound;
+		myAudioSource.volume = 1f;
+		myAudioSource.Play();
+	}
+	
+	void PlayBounceSound() {
+		myAudioSource.clip = bounceSound;
+		myAudioSource.volume = Mathf.Abs(myRigidbody.velocity.y/moveMaxSpeed);
+		myAudioSource.Play();
 	}
 }

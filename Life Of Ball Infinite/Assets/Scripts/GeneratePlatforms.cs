@@ -47,7 +47,7 @@ public class GeneratePlatforms : MonoBehaviour {
 			}
 		}
 		else if(c.collider.tag == "BadPlatform") {
-			Destroy(c.gameObject);
+			c.gameObject.GetComponent<ShatterPlatform>().KillPlatform();
 		}
 	}
 
