@@ -46,10 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Shatter Toolkit\Core\Editor\ShatterToolEditor.cs" />
-     <None Include="Assets\Shatter Toolkit\Documentation\Readme.txt" />
+     <Compile Include="Assets\Shatter Toolkit\Editor\ShatterToolEditor.cs" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
-     <None Include="Assets\Shatter Toolkit\Documentation\License.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Fonts\Jupiter\LICENSE.txt" />

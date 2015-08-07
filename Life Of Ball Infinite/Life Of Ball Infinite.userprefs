@@ -1,18 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GeneratePlatforms.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shatter Toolkit/Editor/ShatterToolEditor.cs">
     <Files>
       <File FileName="Assets/Scripts/CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MoveBall.cs" Line="62" Column="12" />
-      <File FileName="Assets/Scripts/GeneratePlatforms.cs" Line="51" Column="17" />
+      <File FileName="Assets/Scripts/MoveBall.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GeneratePlatforms.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Underwater.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Menu.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Score.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/DestroyPlatform.cs" Line="31" Column="34" />
-      <File FileName="Assets/Shatter Toolkit/Core/Main/WorldUvMapper.cs" Line="1" Column="1" />
-      <File FileName="Assets/Shatter Toolkit/Core/Main/ShatterTool.cs" Line="303" Column="42" />
-      <File FileName="Assets/Shatter Toolkit/Helpers/Mouse/MouseShatter.cs" Line="15" Column="5" />
-      <File FileName="Assets/Scripts/DrownPlatform.cs" Line="23" Column="55" />
+      <File FileName="Assets/Scripts/DestroyPlatform.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DrownPlatform.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ShatterPlatform.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shatter Toolkit/Editor/ShatterToolEditor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
