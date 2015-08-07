@@ -26,7 +26,7 @@ public class MoveBall : MonoBehaviour {
 
 	AudioSource myAudioSource;
 
-	public AudioClip bounceSound, tapSound;
+	public AudioClip bounceSound, tapSound, underwaterSound;
 
 	void Start() {
 		//set starting ball pos.
@@ -92,6 +92,11 @@ public class MoveBall : MonoBehaviour {
 	public void Underwater() {
 		myRigidbody.drag = 2f;
 		myRigidbody.angularDrag = 1f;
+		myAudioSource.clip = underwaterSound;
+		myAudioSource.Play ();
+		if(!myAudioSource.isPlaying) {
+			Debug.Log("playing!!");
+		}
 	}
 	
 	public void AboveWater() {
