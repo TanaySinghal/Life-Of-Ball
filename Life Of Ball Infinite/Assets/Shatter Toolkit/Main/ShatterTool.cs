@@ -327,7 +327,7 @@ public class ShatterTool : MonoBehaviour
 			{
 				newMeshCollider.sharedMesh = newMesh;
 			}
-			
+
 			// Set rigidbody
 			Rigidbody newRigidbody = newGameObject.GetComponent<Rigidbody>();
 

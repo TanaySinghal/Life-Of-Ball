@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class DrownPlatform : MonoBehaviour {
 	
@@ -16,7 +17,20 @@ public class DrownPlatform : MonoBehaviour {
 		Material[] tmp = myRD.materials;
 		myRD.materials = new Material[]{tmp[0]};
 		myRD.material = material;
-		//myRD.material.color = Color.red;
+
+		
+		Mesh mesh = GetComponent<MeshFilter>().mesh;
+		//Creating GO for each
+		int i = Random.Range(1,1000);
+
+
+		//Uncomment to save created meshes
+		/*AssetDatabase.CreateAsset(mesh, "Assets/savedMesh/ShatteredPieces"+i+".asset"); // update line2
+		var prefab = EditorUtility.CreateEmptyPrefab("Assets/savedMesh/ShatteredPieces"+i+".prefab");
+		
+		EditorUtility.ReplacePrefab(gameObject, prefab);
+		AssetDatabase.Refresh();
+		//Done..*/
 	}
 
 	void Update () {
