@@ -22,6 +22,8 @@ public class MoveBall : MonoBehaviour {
 
 	Vector3 startingBallPos;
 
+	bool isMobile;
+
 	void Start() {
 		//set starting ball pos.
 		startingBallPos = transform.position;
@@ -30,15 +32,22 @@ public class MoveBall : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody>();
 		//cameraGO = transform.FindChild("FollowCamera");
 		cameraGO = GameObject.FindGameObjectWithTag("MainCamera").transform;
+
+		isMobile = Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		moveHorizontal = Input.GetAxis("Horizontal");
-		moveVertical = Input.GetAxis("Vertical");
-		if(Input.GetKeyDown("space")) {
-			jump =true;
+		if (isMobile) {
+			moveHorizontal = Mathf.Clamp(Input.acceleration.x,-1,1);
+			moveVertical = Mathf.Clamp(-Input.acceleration.z,-1,1);
 		}
+		else {
+			moveHorizontal = Input.GetAxis("Horizontal");
+			moveVertical = Input.GetAxis("Vertical");
+		}
+
+		jump = Input.GetMouseButtonDown(0) || Input.GetKeyDown("space");
 	}
 
 	void FixedUpdate() {

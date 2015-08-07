@@ -29,7 +29,7 @@ public class Score : MonoBehaviour {
 
 	//MINE: 859 416
 	void Awake () {
-		Debug.Log("Ratio: " + ((float)Screen.width/(float)Screen.height));
+		//Debug.Log("Ratio: " + ((float)Screen.width/(float)Screen.height));
 
 		rectTransform = gameObject.GetComponent<RectTransform>();
 		score = gameObject.GetComponent<Text>();
@@ -38,7 +38,6 @@ public class Score : MonoBehaviour {
 		score.text = "0";
 		color = Color.black;
 		InitializeText();
-		OnScoreChange();
 	}
 
 	void InitializeText() {
@@ -46,19 +45,8 @@ public class Score : MonoBehaviour {
 
 		fontSize = (int)Mathf.Round((1f/8f)*screenHeight);
 		score.fontSize = fontSize;
-		
-		rectHeight = fontSize*1.2f;
-		screenOffset = (20f/500f)*screenHeight;
 	}
 
-	public void OnScoreChange() {
-		score.color = color;
-		rectWidth = score.preferredWidth;
-		float posXFormula = -(rectWidth/2 + screenOffset);
-		rectTransform.anchoredPosition = new Vector3(posXFormula, 0, 0);
-		rectTransform.sizeDelta = new Vector2(rectWidth, rectHeight);
-
-	}
 	
 	public void StoreHighscore() { 
 		//Convert string to int
@@ -67,6 +55,7 @@ public class Score : MonoBehaviour {
 		if(actualScore > highscore) {
 			PlayerPrefs.SetInt("highscore", actualScore);
 			color = new Color(0.75f, 0f, 0f);
+			score.color = color;
 		}
 	}
 }

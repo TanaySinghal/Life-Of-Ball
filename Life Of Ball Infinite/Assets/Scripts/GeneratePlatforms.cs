@@ -42,7 +42,6 @@ public class GeneratePlatforms : MonoBehaviour {
 				//MoveBall.score  = largestPlatformID;
 				Score.score.text = largestPlatformID.ToString();
 				score.StoreHighscore();
-				score.OnScoreChange();
 				CreatePlatform(c.collider.transform);
 				DeletePlatform(largestPlatformID-deletePlatformFromLargest);
 			}
