@@ -335,15 +335,7 @@ public class ShatterTool : MonoBehaviour
 			{
 				float oldMass = GetComponent<Rigidbody>().mass;
 				newRigidbody.mass = oldMass * (volume / totalVolume);
-				newRigidbody.useGravity = true;
 				newRigidbody.AddExplosionForce((oldMass/newHulls.Count)*100f, hitPoint+Vector3.up, 2f);
-				//make sure they separate
-				if (!newRigidbody.isKinematic)
-				{
-					newRigidbody.velocity = GetComponent<Rigidbody>().GetPointVelocity(newRigidbody.worldCenterOfMass);
-					
-					newRigidbody.angularVelocity = GetComponent<Rigidbody>().angularVelocity;
-				}
 			}
 			//Remove all scripts
 			

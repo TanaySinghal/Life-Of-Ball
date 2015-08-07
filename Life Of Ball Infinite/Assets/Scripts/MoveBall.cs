@@ -44,8 +44,6 @@ public class MoveBall : MonoBehaviour {
 
 	// Update is called once per frame
 
-	int frameRate;
-
 	void Update () {
 		if (isMobile) {
 			moveHorizontal = Mathf.Clamp(Input.acceleration.x,-1,1);
@@ -57,9 +55,6 @@ public class MoveBall : MonoBehaviour {
 		}
 
 		jump = Input.GetMouseButton(0) || Input.GetKey("space");
-
-		//instead take the average over time..
-		frameRate = (int)(1/Time.deltaTime);
 	}
 
 	void FixedUpdate() {
@@ -92,10 +87,6 @@ public class MoveBall : MonoBehaviour {
 		else if(jump && isFalling) {
 			jump = false;
 		}
-	}
-
-	void OnGUI() {
-		GUI.Button(new Rect(Screen.width/2-150, 60, 300, 30), "Frame Rate: " + frameRate);
 	}
 	
 	public void Underwater() {

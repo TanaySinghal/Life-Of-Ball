@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void FixedUpdate() {
 		//Damp, distance
-		followCamera(0.2f, 4f);
+		followCamera(0.2f, 3.5f);
 		//followBall();
 	}
 
@@ -49,6 +49,7 @@ public class CameraFollow : MonoBehaviour {
 		tempPosition.y = target.position.y + offset.y;
 
 		transform.position = tempPosition;
-		transform.LookAt(pTarget);
+		//look a little bit higher than the ball
+		transform.LookAt(pTarget+Vector3.up);
 	}
 }

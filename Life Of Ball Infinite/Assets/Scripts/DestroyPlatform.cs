@@ -28,7 +28,6 @@ public class DestroyPlatform : MonoBehaviour {
 			//From scores 0 to 15, decrease platform time from 3 to 1
 			platformTimer = 3f - Mathf.Clamp(GeneratePlatforms.largestPlatformID/10f, 0f, 1.5f);
 			beginChangingColor = true;
-			StartCoroutine(RemovePlatform());
 		}
 
 	}
@@ -39,16 +38,15 @@ public class DestroyPlatform : MonoBehaviour {
 
 	void ChangeColor() {
 		myRenderer.material.color = Color.Lerp(startColor, endColor, t);
-		if (t < 1){ // while t below the end limit...
+		if (t < platformTimer){ // while t below the end limit...
 			// increment it at the desired rate every update:
-			t += Time.deltaTime/platformTimer;
+			t += Time.deltaTime;
 		}
-	}
-	
-	public IEnumerator RemovePlatform() {
-		yield return new WaitForSeconds(platformTimer);
-		//Attach rigidbody
-		ShatterPlatform SP = GetComponent<ShatterPlatform>();
-		SP.KillPlatform();
+		else {
+			//If t > 1, destroy timer.
+			ShatterPlatform SP = GetComponent<ShatterPlatform>();
+			SP.KillPlatform();
+		}
+
 	}
 }
