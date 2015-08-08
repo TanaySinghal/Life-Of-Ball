@@ -16,14 +16,13 @@ public class DestroyPlatform : MonoBehaviour {
 	bool beginChangingColor;
 	//This will play every time a new platform is created.. perhaps more efficient to put it elsewhere
 	void Awake() {
+		myRenderer = GetComponent<Renderer>();
+		startColor = new Color(28f/255f, 165f/255f, 52f/255f);
+		endColor = new Color(1f, 0f, 0f);
 		Reset ();
-		Debug.Log("HI");
 	}
 
 	public void Reset() {
-		startColor = new Color(28f/255f, 165f/255f, 52f/255f);
-		endColor = new Color(1f, 0f, 0f);
-		myRenderer = GetComponent<Renderer>();
 		myRenderer.material.color = startColor;
 		t = 0;
 		beginChangingColor = false;
@@ -31,7 +30,7 @@ public class DestroyPlatform : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c) {
 		if(c.collider.tag == "Player" && !this.name.Contains("-0")) {
-			//From scores 0 to 15, decrease platform time from 3 to 1
+			//From scores 0 to 15, decrease platform time from 3 to 1.5
 			platformTimer = 3f - Mathf.Clamp(GeneratePlatforms.largestPlatformID/10f, 0f, 1.5f);
 			beginChangingColor = true;
 		}
@@ -51,7 +50,7 @@ public class DestroyPlatform : MonoBehaviour {
 		else {
 			//If t > 1, destroy timer.
 			ShatterPlatform SP = GetComponent<ShatterPlatform>();
-			SP.KillPlatform();
+			SP.DestroyAndRecyclePlatform();
 			Reset();
 		}
 

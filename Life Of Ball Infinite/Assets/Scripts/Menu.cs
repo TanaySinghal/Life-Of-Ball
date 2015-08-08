@@ -5,14 +5,14 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour {
 
 	
-	
-	//1536x2048 = 1.426
-	//1080x1920 = 1.778
-	//750x1334 = 1.779
-	//768x1024 = 1.333
-	//640x960 1.5
+	///iPhone screen resolutions:
+	///1536x2048 = 1.426
+	///1080x1920 = 1.778
+	///750x1334 = 1.779
+	///768x1024 = 1.333
+	///640x960 1.5
 
-	//900 by 1440
+	///900 by 1440
 	void Awake() {
 
 		int screenH = Screen.height;

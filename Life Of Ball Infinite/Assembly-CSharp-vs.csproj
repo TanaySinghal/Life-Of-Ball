@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BallManager.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\DestroyPlatform.cs" />
      <Compile Include="Assets\Scripts\DrownPlatform.cs" />
@@ -57,18 +58,6 @@
      <Compile Include="Assets\Scripts\ShatterPlatform.cs" />
      <Compile Include="Assets\Scripts\Underwater.cs" />
      <Compile Include="Assets\SelfDistruct.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Common\Tools.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Hull\Edge.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Hull\EdgeHit.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Hull\Hull.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Hull\Point.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Hull\Triangle.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Triangulator\ITriangulator.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\Triangulator\Triangulator.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Library\UvMapper\UvMapper.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Main\ShatterTool.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Main\TargetUvMapper.cs" />
-     <Compile Include="Assets\Shatter Toolkit\Main\WorldUvMapper.cs" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />

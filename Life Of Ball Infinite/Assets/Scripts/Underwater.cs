@@ -5,13 +5,14 @@ public class Underwater : MonoBehaviour {
 
 	// Update is called once per frame
 	Transform cam;
-	MoveBall moveBall;
+	BallManager ballScript;
 
 	Transform oceanBeds;
 	bool alreadyUnderwater;
 
 	void Start() {
-		moveBall = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveBall> ();
+		ballScript = GameObject.FindGameObjectWithTag("Player").GetComponent<BallManager> ();
+
 		cam = GameObject.Find("FollowCamera").transform;
 		oceanBeds = GameObject.Find("OceanBeds").transform;
 		oceanBeds.gameObject.SetActive(false);
@@ -27,12 +28,12 @@ public class Underwater : MonoBehaviour {
 			alreadyUnderwater = true;
 			RenderSettings.fog = true;
 			followBall();
-			moveBall.Underwater();
+			ballScript.Underwater();
 		}
 		else if(cam.position.y >= transform.position.y && alreadyUnderwater) {
 			alreadyUnderwater = false;
 			RenderSettings.fog = false;
-			moveBall.AboveWater();
+			ballScript.AboveWater();
 		}
 	}
 

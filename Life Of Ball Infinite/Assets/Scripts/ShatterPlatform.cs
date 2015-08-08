@@ -14,17 +14,9 @@ public class ShatterPlatform : MonoBehaviour {
 	}
 	
 
-	public void KillPlatform() {
+	public void DestroyAndRecyclePlatform() {
 
-		//This is to use the shattertool thing.. in whihc case you'd get rid of the if statement below
-
-		/*if(GetComponent<Renderer>().isVisible) {
-			Rigidbody myRB = gameObject.AddComponent<Rigidbody>();
-			myRB.mass = 5f;
-			//Remove all scripts
-			ShatterTool shatterTool = GetComponent<ShatterTool>();
-			shatterTool.Shatter(transform.position);
-		}*/
+		//First shatter platform
 		if(GetComponent<Renderer>().isVisible) {
 			GameObject GO = Instantiate(brokenPlatform, transform.position, Quaternion.identity) as GameObject;
 			GO.transform.parent = transform;
@@ -48,6 +40,7 @@ public class ShatterPlatform : MonoBehaviour {
 
 		}
 
+		//Now recycle destroyed platform back to pool
 		if(gameObject.tag.Contains("Bad")) {
 			transform.name = "PoolBadPlatform";
 		}
@@ -55,11 +48,8 @@ public class ShatterPlatform : MonoBehaviour {
 			transform.name = "PoolPlatform";
 		}
 
-		//Instead of this, add to pool
 		transform.position = new Vector3(0, -20, 0);
 		transform.parent = GameObject.Find("PooledPlatforms").transform;
-
-
 	}
 
 }

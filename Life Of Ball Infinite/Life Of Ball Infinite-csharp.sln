@@ -5,8 +5,6 @@ Project("{4B5E5512-1BEA-2AF7-F2C6-EED7D1FE3037}") = "Life Of Ball Infinite", "As
 EndProject
 Project("{4B5E5512-1BEA-2AF7-F2C6-EED7D1FE3037}") = "Life Of Ball Infinite", "Assembly-CSharp-vs.csproj", "{63543FD2-B00E-7AD7-F473-17D822C166E7}"
 EndProject
-Project("{4B5E5512-1BEA-2AF7-F2C6-EED7D1FE3037}") = "Life Of Ball Infinite", "Assembly-CSharp-Editor-vs.csproj", "{EB215ABE-903B-3D4F-B1CE-82CF2ACD3DE1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,15 +19,11 @@ Global
 		{63543FD2-B00E-7AD7-F473-17D822C166E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63543FD2-B00E-7AD7-F473-17D822C166E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63543FD2-B00E-7AD7-F473-17D822C166E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB215ABE-903B-3D4F-B1CE-82CF2ACD3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB215ABE-903B-3D4F-B1CE-82CF2ACD3DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB215ABE-903B-3D4F-B1CE-82CF2ACD3DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB215ABE-903B-3D4F-B1CE-82CF2ACD3DE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																														GlobalSection(MonoDevelopProperties) = preSolution
+																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

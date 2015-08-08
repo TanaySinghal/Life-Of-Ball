@@ -3,28 +3,17 @@ using System.Collections;
 
 public class MoveBall : MonoBehaviour {
 
-	private float moveHorizontal, moveVertical;
+	private float mySpeed, moveHorizontal, moveVertical, horizontalWeight = 10f, verticalWeight = 1f;
 	private Transform cameraGO;
-	private bool jump, isFalling;
+	private bool jump, isMobile;
 
-	private float mySpeed;
-	private float myMass;
-
-	public float moveForce;
-	public float moveMaxSpeed;
-	public float jumpMaxSpeed;
-	public float jumpForce;
+	public static bool isFalling;
+	public static float moveMaxSpeed = 8f;
+	//Values are: 200, 8, 8000
+	public float moveForce, jumpMaxSpeed, jumpForce;
 
 	Rigidbody myRigidbody;
-
-	float horizontalWeight = 10f;
-	float verticalWeight = 1f;
-
-	bool isMobile;
-
-	AudioSource myAudioSource;
-
-	public AudioClip bounceSound, tapSound, underwaterSound;
+	BallManager BM;
 
 	void Start() {
 		mySpeed = 0f;
@@ -33,11 +22,8 @@ public class MoveBall : MonoBehaviour {
 		cameraGO = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
 		isMobile = (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer);
-
-		myAudioSource = GetComponent<AudioSource>();
+		BM = GetComponent<BallManager>();
 	}
-
-	// Update is called once per frame
 
 	void Update () {
 		if (isMobile) {
@@ -67,14 +53,15 @@ public class MoveBall : MonoBehaviour {
 			myRigidbody.AddForce(-myRigidbody.velocity);
 		}
 
-		Vector3 direction = rotation * (new Vector3 (moveHorizontal*horizontalWeight, 0, moveVertical*verticalWeight)); //controls are based on camera angle
+		//Controls are based on camera angle
+		Vector3 direction = rotation * (new Vector3 (moveHorizontal*horizontalWeight, 0, moveVertical*verticalWeight));
 		direction.Normalize ();
 		//Forward force
 		myRigidbody.AddForce(direction*moveForce*Time.deltaTime);
 		
 		//Allow jump if we are on the ground
 		if (jump && !isFalling) {
-			playTapSound();
+			BM.playTapSound();
 			myRigidbody.AddForce(Vector3.up*jumpForce*Time.deltaTime);
 			isFalling = true;
 			jump = false;
@@ -82,43 +69,5 @@ public class MoveBall : MonoBehaviour {
 		else if(jump && isFalling) {
 			jump = false;
 		}
-	}
-	
-	public void Underwater() {
-		myRigidbody.drag = 2f;
-		myRigidbody.angularDrag = 1f;
-		myAudioSource.clip = underwaterSound;
-		myAudioSource.Play ();
-	}
-	
-	public void AboveWater() {
-		myRigidbody.drag = 0f;
-		myRigidbody.angularDrag = 0.05f;
-	}
-	
-	public void KillPlayer() {
-		Application.LoadLevel("Finish");
-	}
-
-	void OnCollisionEnter(Collision c) {
-		isFalling = false;
-		if(c.collider.tag == "Platform") {
-			PlayBounceSound();
-		}
-		else if(c.collider.tag == "OceanFloor") {
-			KillPlayer();
-		}
-	}
-	
-	void playTapSound() {
-		myAudioSource.clip = tapSound;
-		myAudioSource.volume = 1f;
-		myAudioSource.Play();
-	}
-	
-	void PlayBounceSound() {
-		myAudioSource.clip = bounceSound;
-		myAudioSource.volume = Mathf.Abs(myRigidbody.velocity.y/moveMaxSpeed);
-		myAudioSource.Play();
 	}
 }
