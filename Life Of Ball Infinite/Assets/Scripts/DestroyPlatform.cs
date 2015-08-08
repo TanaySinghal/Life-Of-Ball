@@ -16,9 +16,15 @@ public class DestroyPlatform : MonoBehaviour {
 	bool beginChangingColor;
 	//This will play every time a new platform is created.. perhaps more efficient to put it elsewhere
 	void Awake() {
+		Reset ();
+		Debug.Log("HI");
+	}
+
+	public void Reset() {
 		startColor = new Color(28f/255f, 165f/255f, 52f/255f);
 		endColor = new Color(1f, 0f, 0f);
 		myRenderer = GetComponent<Renderer>();
+		myRenderer.material.color = startColor;
 		t = 0;
 		beginChangingColor = false;
 	}
@@ -46,6 +52,7 @@ public class DestroyPlatform : MonoBehaviour {
 			//If t > 1, destroy timer.
 			ShatterPlatform SP = GetComponent<ShatterPlatform>();
 			SP.KillPlatform();
+			Reset();
 		}
 
 	}

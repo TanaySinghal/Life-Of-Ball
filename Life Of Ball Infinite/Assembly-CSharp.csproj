@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\ShatterPlatform.cs" />
      <Compile Include="Assets\Scripts\Underwater.cs" />
+     <Compile Include="Assets\SelfDistruct.cs" />
      <Compile Include="Assets\Shatter Toolkit\Library\Common\Tools.cs" />
      <Compile Include="Assets\Shatter Toolkit\Library\Hull\Edge.cs" />
      <Compile Include="Assets\Shatter Toolkit\Library\Hull\EdgeHit.cs" />

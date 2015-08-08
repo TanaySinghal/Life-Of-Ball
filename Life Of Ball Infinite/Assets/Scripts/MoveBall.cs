@@ -20,8 +20,6 @@ public class MoveBall : MonoBehaviour {
 	float horizontalWeight = 10f;
 	float verticalWeight = 1f;
 
-	Vector3 startingBallPos;
-
 	bool isMobile;
 
 	AudioSource myAudioSource;
@@ -29,15 +27,12 @@ public class MoveBall : MonoBehaviour {
 	public AudioClip bounceSound, tapSound, underwaterSound;
 
 	void Start() {
-		//set starting ball pos.
-		startingBallPos = transform.position;
-
 		mySpeed = 0f;
 		myRigidbody = GetComponent<Rigidbody>();
 		//cameraGO = transform.FindChild("FollowCamera");
 		cameraGO = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
-		isMobile = Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
+		isMobile = (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer);
 
 		myAudioSource = GetComponent<AudioSource>();
 	}
@@ -61,13 +56,13 @@ public class MoveBall : MonoBehaviour {
 		//get camera angle
 		Quaternion rotation = Quaternion.Euler(0, cameraGO.eulerAngles.y, 0); 
 
-		mySpeed = myRigidbody.velocity.magnitude;
+		mySpeed = myRigidbody.velocity.sqrMagnitude;
 		//Don't allow ball to go past full speed
-		if(mySpeed > moveMaxSpeed && !isFalling) {
+		if(mySpeed > moveMaxSpeed*moveMaxSpeed && !isFalling) {
 			moveVertical = 0f;
 			myRigidbody.AddForce(-myRigidbody.velocity);
 		}
-		else if(mySpeed > jumpMaxSpeed && isFalling) {
+		else if(mySpeed > jumpMaxSpeed*jumpMaxSpeed && isFalling) {
 			moveVertical = 0f;
 			myRigidbody.AddForce(-myRigidbody.velocity);
 		}
@@ -94,9 +89,6 @@ public class MoveBall : MonoBehaviour {
 		myRigidbody.angularDrag = 1f;
 		myAudioSource.clip = underwaterSound;
 		myAudioSource.Play ();
-		if(!myAudioSource.isPlaying) {
-			Debug.Log("playing!!");
-		}
 	}
 	
 	public void AboveWater() {
