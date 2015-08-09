@@ -19,10 +19,9 @@ public class Score : MonoBehaviour {
 	//768x1024 = 1.333
 	//640x960 1.5
 
-
 	//MINE: 859 416
 	void Awake () {
-		//Debug.Log("Ratio: " + ((float)Screen.width/(float)Screen.height));
+		Debug.Log("Canvas size: " + Screen.width + ", " + Screen.height);
 		score = gameObject.GetComponent<Text>();
 
 		highscore = PlayerPrefs.GetInt("highscore");

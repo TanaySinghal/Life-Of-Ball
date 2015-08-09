@@ -13,11 +13,16 @@ public class Menu : MonoBehaviour {
 	///640x960 1.5
 
 	///900 by 1440
+	/// 
+	///
+
+	public static float multiplier;
+
 	void Awake() {
 
 		int screenH = Screen.height;
 		Debug.Log ("Screen size: " + Screen.width + ", " + screenH);
-		float multiplier = 1f;
+		multiplier = 1f;
 		if(screenH > 600) {
 			multiplier = 1.5f;
 		}
@@ -52,6 +57,8 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		//Check if pressed here
+		MoveBall.useTilt = RadioButtons.tilt;
 		Application.LoadLevel("Loading");
 	}
 

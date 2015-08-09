@@ -1,4 +1,10 @@
-z;
+ColorSpaceDielectricSpec.w;
+    //Instruction 4169
+    //MAD
+    t16_4.xyz = t16_1.xyz * vec3(t16_24) + t16_4.xyz;
+    //Instruction 4170
+    //MUL
+    t16_3.xyz = t16_3.xyz * t16_4.xyz;
     //Instruction 4171
     //MUL
     t16_3.xyz = t16_0.yyy * t16_3.xyz;
@@ -35273,9 +35279,4 @@ attribute vec4 _glesMultiTexCoord1;
 uniform highp vec3 _WorldSpaceCameraPos;
 uniform highp vec4 _WorldSpaceLightPos0;
 uniform highp vec4 _LightPositionRange;
-uniform highp mat4 glstate_matrix_mvp;
-uniform highp mat4 _Object2World;
-uniform highp mat4 _World2Object;
-uniform highp vec4 unity_FogParams;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailAlbe
+uniform highp mat4 gl

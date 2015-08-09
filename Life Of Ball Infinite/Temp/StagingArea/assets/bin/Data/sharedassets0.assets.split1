@@ -1,4 +1,10 @@
-yz * t10_12.xyz + (-unity_ColorSpaceDielectricSpec.xyz);
+  t10_12.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
+    //Instruction 476
+    //MUL
+    t16_5.xyz = t10_12.xyz * _Color.xyz;
+    //Instruction 477
+    //MAD
+    t16_1.xyz = _Color.xyz * t10_12.xyz + (-unity_ColorSpaceDielectricSpec.xyz);
     //Instruction 478
     //MAD
     t16_1.xyz = vec3(_Metallic) * t16_1.xyz + unity_ColorSpaceDielectricSpec.xyz;
@@ -37259,10 +37265,4 @@ void main()
     t16_4.xyz = t16_0.xxx * t16_4.xyz;
     //Instruction 4168
     //MAD
-    t16_24 = (-_Metallic) * unity_ColorSpaceDielectricSpec.w + unity_ColorSpaceDielectricSpec.w;
-    //Instruction 4169
-    //MAD
-    t16_4.xyz = t16_1.xyz * vec3(t16_24) + t16_4.xyz;
-    //Instruction 4170
-    //MUL
-    t16_3.xyz = t16_3.xyz * t16_4.xy
+    t16_24 = (-_Metallic) * unity_ColorSpaceDielectricSpec.w + unity_

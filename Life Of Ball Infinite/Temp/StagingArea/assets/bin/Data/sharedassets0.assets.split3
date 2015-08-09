@@ -1,4 +1,9 @@
-doMap_ST;
+state_matrix_mvp;
+uniform highp mat4 _Object2World;
+uniform highp mat4 _World2Object;
+uniform highp vec4 unity_FogParams;
+uniform highp vec4 _MainTex_ST;
+uniform highp vec4 _DetailAlbedoMap_ST;
 uniform mediump float _UVSec;
 uniform mediump mat4 _LightMatrix0;
 varying highp vec4 xlv_TEXCOORD0;
