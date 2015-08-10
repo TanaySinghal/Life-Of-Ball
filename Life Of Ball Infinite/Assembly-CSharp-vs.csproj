@@ -46,12 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\JoystickScaler.cs" />
      <Compile Include="Assets\Scripts\BallManager.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\DestroyPlatform.cs" />
      <Compile Include="Assets\Scripts\DrownPlatform.cs" />
      <Compile Include="Assets\Scripts\GeneratePlatforms.cs" />
+     <Compile Include="Assets\Scripts\JoystickScaler.cs" />
      <Compile Include="Assets\Scripts\Loading.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\MoveBall.cs" />
