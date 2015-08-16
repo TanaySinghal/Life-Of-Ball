@@ -47,13 +47,19 @@ public class Menu : MonoBehaviour {
 		VerticalLayoutGroup VLG = GameObject.Find("Panel").GetComponent<VerticalLayoutGroup>();
 		VLG.padding.left = (int)(40f*multiplier);
 		VLG.padding.right = (int)(40f*multiplier);
-		VLG.padding.top = (int)(-20f*multiplier);
+		VLG.padding.top = 0;
 		VLG.padding.bottom = (int)(20f*multiplier);
 		VLG.spacing = (int)(10f*multiplier);
 
+		//Fix horizontal spacing
+		if(transform.FindChild("Controls") != null) {
+			HorizontalLayoutGroup HLG = transform.FindChild("Controls").GetComponent<HorizontalLayoutGroup>();
+			HLG.spacing = (int)(10f*multiplier);
+		}
+
 		RectTransform RT = GameObject.Find("Panel").GetComponent<RectTransform>();
 		//RT.sizeDelta.Set((int)(400*multiplier),(int)(300*multiplier));
-		RT.sizeDelta = new Vector2((int)(400*multiplier), (int)(300*multiplier));
+		RT.sizeDelta = new Vector2((int)(400*multiplier), (int)(350*multiplier));
 	}
 
 	public void StartGame() {
@@ -66,11 +72,13 @@ public class Menu : MonoBehaviour {
 		//Http request friend's scores
 	}
 
-	public void Settings() {
-	}
-
 	public void ReturnToMainMenu() {
 		Application.LoadLevel("Start");
 	}
+
+	public void QuitGame() {
+		Application.Quit();
+	}
+
 	
 }
