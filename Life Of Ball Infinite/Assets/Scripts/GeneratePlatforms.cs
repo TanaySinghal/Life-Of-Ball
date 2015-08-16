@@ -4,20 +4,21 @@ using System.Collections;
 public class GeneratePlatforms : MonoBehaviour {
 
 	Transform platformParent;
+	Transform poolParent;
 
 	//Being accessed from DestroyPlatform
 	public static int largestPlatformID;
 
-	int deletePlatformFromLargest = 1;
-
-
+	int deletePlatformFromLargest = 2;
+	
 	Score score;
 
 	void Awake () {
 		score = GameObject.Find("ScoreText").GetComponent<Score>();
 		largestPlatformID = 0;
-		//jumpDistance = Mathf.Clamp(jumpDistance, minJumpDistance, maxJumpDistance);
+
 		platformParent = GameObject.Find("Platforms").transform;
+		poolParent = GameObject.Find("PooledPlatforms").transform;
 
 	}
 
@@ -35,7 +36,10 @@ public class GeneratePlatforms : MonoBehaviour {
 				//MoveBall.score  = largestPlatformID;
 				Score.score.text = largestPlatformID.ToString();
 				score.StoreHighscore();
-				CreatePlatform(c.collider.transform, largestPlatformID - deletePlatformFromLargest);
+				CreatePlatform(c.collider.transform);
+
+				SendToPool(largestPlatformID-deletePlatformFromLargest, "BadPlatform");
+				SendToPool(largestPlatformID-deletePlatformFromLargest, "Platform");
 			}
 		}
 		else if(c.collider.tag == "BadPlatform") {
@@ -46,7 +50,7 @@ public class GeneratePlatforms : MonoBehaviour {
 	float currentJumpDistance;
 	
 
-	void CreatePlatform(Transform thisPlatform, int deletePlatformID) {
+	void CreatePlatform(Transform thisPlatform) {
 		//Update largest platform id
 		largestPlatformID ++;
 		
@@ -98,12 +102,12 @@ public class GeneratePlatforms : MonoBehaviour {
 
 			//Check if we have won the loterry to create a bad platform
 			if(badPlatformLottery == 1 && badPlatformCount < 2) {
-				nextPlatform = RecyclePlatform(deletePlatformID, "BadPlatform");
+				nextPlatform = GetFromPool("BadPlatform");
 				nextPlatform.tag = "BadPlatform";
 				badPlatformCount ++;
 			}
 			else {
-				nextPlatform = RecyclePlatform(deletePlatformID, "Platform");
+				nextPlatform = GetFromPool("Platform");
 				nextPlatform.tag = "Platform";
 			}
 
@@ -116,20 +120,38 @@ public class GeneratePlatforms : MonoBehaviour {
 		}
 	}
 
-	GameObject RecyclePlatform(int platformID, string tag) {
+	void SendToPool(int platformID, string tag) {
+		Vector3 position = new Vector3(0, -20, 0);
+		string name;
+
+		if(tag.Contains("Bad")) {
+			name  = "PoolBadPlatform";
+		}
+		else {
+			name = "PoolPlatform";
+		}
+
 		foreach(GameObject platform in GameObject.FindGameObjectsWithTag(tag)) {
+			//Now recycle destroyed platform back to pool
 			if(platform.name.Contains("-")) {
 				string[] tempSplit = platform.name.Split('-');
 				int tempID = int.Parse(tempSplit[1]);
 				if(tempID <= platformID) {
-					return platform;
+					platform.transform.position = position;
+					platform.transform.name = name;
+					platform.transform.parent = poolParent;
 				}
 			}
-			else if(platform.name.Contains("Pool")) {
+		}
+	}
+
+	GameObject GetFromPool(string tag) {
+		foreach(GameObject platform in GameObject.FindGameObjectsWithTag(tag)) {
+			if(platform.name.Contains("Pool")) {
 				return platform;
 			}
 		}
-		//If nothing works..
+		//This should never happen
 		return null;
 	}
 }

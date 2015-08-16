@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
 
+	public float cameraDistance = 3.5f;
 	private Transform target;
 	private Vector3 offset;
 
@@ -14,7 +15,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void FixedUpdate() {
 		//Damp, distance
-		followCamera(0.2f, 3.5f);
+		followCamera(0.2f, cameraDistance);
 		//followBall();
 	}
 

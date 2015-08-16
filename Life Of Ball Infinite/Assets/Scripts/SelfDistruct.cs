@@ -9,7 +9,7 @@ public class SelfDistruct : MonoBehaviour {
 
 	//Self destruct
 	IEnumerator Die() {
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(5f);
 		Destroy(gameObject);
 	}
 }

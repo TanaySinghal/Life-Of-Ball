@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
-
-	
 	///iPhone screen resolutions:
 	///1536x2048 = 1.426
 	///1080x1920 = 1.778
@@ -22,21 +20,14 @@ public class Menu : MonoBehaviour {
 
 		int screenH = Screen.height;
 		Debug.Log ("Screen size: " + Screen.width + ", " + screenH);
-		multiplier = 1f;
-		if(screenH > 600) {
-			multiplier = 1.5f;
-		}
-		if(screenH > 1000) {
-			multiplier = 2f;
-		}
-		if(screenH > 1400) {
-			multiplier = 2.5f;
-		}
+
+		//Adjusting
+		int sizeY = (int)(screenH*0.75f);
+		int sizeX = (int)((400f/350f)*sizeY);
+		multiplier = sizeY/350f;
 
 		Text highscore = GameObject.Find("Highscore").GetComponent<Text>();
-		if(highscore != null) {
-			highscore.text = PlayerPrefs.GetInt("highscore").ToString();
-		}
+		highscore.text = PlayerPrefs.GetInt("highscore").ToString();
 		highscore.fontSize = (int)(70f*multiplier);
 
 		foreach(GameObject textGO in GameObject.FindGameObjectsWithTag("MenuText")) {
@@ -44,7 +35,7 @@ public class Menu : MonoBehaviour {
 			menuText.fontSize = (int)(60f*multiplier);
 		}
 
-		VerticalLayoutGroup VLG = GameObject.Find("Panel").GetComponent<VerticalLayoutGroup>();
+		VerticalLayoutGroup VLG = GetComponent<VerticalLayoutGroup>();
 		VLG.padding.left = (int)(40f*multiplier);
 		VLG.padding.right = (int)(40f*multiplier);
 		VLG.padding.top = 0;
@@ -57,9 +48,10 @@ public class Menu : MonoBehaviour {
 			HLG.spacing = (int)(10f*multiplier);
 		}
 
-		RectTransform RT = GameObject.Find("Panel").GetComponent<RectTransform>();
-		//RT.sizeDelta.Set((int)(400*multiplier),(int)(300*multiplier));
-		RT.sizeDelta = new Vector2((int)(400*multiplier), (int)(350*multiplier));
+		RectTransform RT = GetComponent<RectTransform>();
+
+		//RT.sizeDelta = new Vector2((int)(400f*multiplier), (int)(350f*multiplier));
+		RT.sizeDelta = new Vector2(sizeX, sizeY);
 	}
 
 	public void StartGame() {
@@ -79,6 +71,4 @@ public class Menu : MonoBehaviour {
 	public void QuitGame() {
 		Application.Quit();
 	}
-
-	
 }

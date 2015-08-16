@@ -43,7 +43,7 @@ public class DestroyPlatform : MonoBehaviour {
 
 	void ChangeColor() {
 		myRenderer.material.color = Color.Lerp(startColor, endColor, t);
-		if (t < platformTimer){ // while t below the end limit...
+		if (t < platformTimer){ // if t is below the end limit...
 			// increment it at the desired rate every update:
 			t += Time.deltaTime;
 		}
